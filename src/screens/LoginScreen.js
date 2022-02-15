@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? moderateScale(10) : moderateScale(28),
+        fontSize: width > height ? moderateScale(15) : moderateScale(28),
         color: "#999999",
         fontWeight: "bold",       
     }
