@@ -97,9 +97,6 @@ const styles = StyleSheet.create({
         textAlignVertical: "center",
         fontFamily: "Times New Roman",
     },
-    textColor: {
-        color: "#3f48cc",
-    },
     button: {
         backgroundColor: "#eeeeee",
         textAlign: "center",
@@ -108,7 +105,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? moderateScale(15) : moderateScale(30),
+        fontSize: width > height ? moderateScale(10) : moderateScale(28),
         color: "#999999",
         fontWeight: "bold",       
     }
