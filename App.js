@@ -7,7 +7,7 @@ import BackgroundImage from './assets/json.png';
 export default function App() {
   return (
     <View style={styles.container}>
-      <LoginScreen></LoginScreen>
+      {/* <LoginScreen></LoginScreen> */}
       {/* <ImageBackground source={BackgroundImage} resizeMode="center" imageStyle={{opacity : 1}} style={styles.backgroundImage}>
         
       </ImageBackground> */}

@@ -19,7 +19,7 @@ export default function LoginScreen() {
 
             <View style={[styles.bottomContainer]}>
                 <View style={[styles.bottomWindow]}>
-                    <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+                    <TouchableOpacity style={[styles.button, {opacity : 0.5}]} activeOpacity={0.7} disabled={true}>
                         <Text style={styles.buttonText}>KAYIT OL</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} activeOpacity={0.7}>
