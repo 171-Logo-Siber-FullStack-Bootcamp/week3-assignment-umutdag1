@@ -6,13 +6,16 @@ export default function LoginScreen() {
         <View style={styles.container}>
             <View style={[styles.topContainer]}>
                 <View style={[styles.topWindow]}>
-                    <Text style={styles.firstText}>
+                    <Text style={styles.mainText}>
                         <Text>{"{ "}</Text>
                         <Text style={styles.innerText}>JSON</Text>
                         <Text>{" }"}</Text>
                     </Text>
-                    <Text style={styles.secondText}>
+                    <Text style={styles.subText}>
                         <Text style={styles.innerText}>PlaceHolder</Text>
+                    </Text>
+                    <Text style={styles.subText}>
+                        <Text style={styles.innerText}>Mobile</Text>
                     </Text>
                 </View>
             </View>
@@ -50,17 +53,16 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "space-around",
         alignItems: "center",
-        backgroundColor: "#1e3a8a"
     },
     centerText: {
         textAlignVertical: "center",
     },
-    firstText: {
+    mainText: {
         color: "#eeeeee",
         fontSize: width > height ? moderateScale(40) : moderateScale(80),
         fontWeight: "bold",
     },
-    secondText: {
+    subText: {
         color: "#eeeeee",
         fontSize:  width > height ? moderateScale(20) : moderateScale(40),
         fontWeight: "bold"
