@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
     },
     mainText: {
         color: "#eeeeee",
-        fontSize: width > height ? moderateScale(40) : moderateScale(80),
+        fontSize: width > height ? scale(height / width * 60) : verticalScale(width / height * 120),
         fontWeight: "bold",
     },
     subText: {
         color: "#eeeeee",
-        fontSize:  width > height ? moderateScale(20) : moderateScale(40),
+        fontSize:  width > height ? scale(height / width * 30) : verticalScale(width / height * 60),
         fontWeight: "bold"
     },
     innerText: {
