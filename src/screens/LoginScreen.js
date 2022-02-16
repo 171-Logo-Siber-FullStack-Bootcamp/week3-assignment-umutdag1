@@ -98,11 +98,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#eeeeee",
         textAlign: "center",
         width: "50%",
-        padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 40),
+        padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? scale(height / width * 20) : verticalScale(width / height * 50),
+        fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
         color: "#999999",
         fontWeight: "bold",       
     }

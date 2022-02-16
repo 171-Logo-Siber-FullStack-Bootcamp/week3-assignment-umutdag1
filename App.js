@@ -8,8 +8,8 @@ import MenuScreen from './src/screens/MenuScreen';
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <LoginScreen></LoginScreen> */}
-      <MenuScreen></MenuScreen>
+      <LoginScreen></LoginScreen>
+      {/* <MenuScreen></MenuScreen> */}
       {/* <ImageBackground source={BackgroundImage} resizeMode="center" imageStyle={{opacity : 1}} style={styles.backgroundImage}>
         
       </ImageBackground> */}
