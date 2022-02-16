@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     mainText: {
         color: "#eeeeee",
         marginLeft: "3%",
-        fontSize: width > height ? moderateScale(25) : moderateScale(55),
+        fontSize: width > height ? scale(height / width * 40) : verticalScale(width / height * 80),
         fontWeight: "bold",
         //fontFamily: "Times New Roman",
     },
