@@ -50,22 +50,7 @@ const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * fact
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "column",
-        justifyContent: "space-around",
-        alignItems: "center",
-    },
-    centerText: {
-        textAlignVertical: "center",
-    },
-    mainText: {
-        color: "#eeeeee",
-        fontSize: width > height ? moderateScale(40) : moderateScale(80),
-        fontWeight: "bold",
-    },
-    subText: {
-        color: "#eeeeee",
-        fontSize:  width > height ? moderateScale(20) : moderateScale(40),
-        fontWeight: "bold"
+        flexDirection : "column"
     },
     topContainer: {
         flex: 6,
@@ -95,6 +80,16 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center",
     },
+    mainText: {
+        color: "#eeeeee",
+        fontSize: width > height ? moderateScale(40) : moderateScale(80),
+        fontWeight: "bold",
+    },
+    subText: {
+        color: "#eeeeee",
+        fontSize:  width > height ? moderateScale(20) : moderateScale(40),
+        fontWeight: "bold"
+    },
     innerText: {
         textAlignVertical: "center",
         fontFamily: "Times New Roman",
@@ -103,11 +98,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#eeeeee",
         textAlign: "center",
         width: "50%",
-        padding: width > height ? moderateScale(5) : moderateScale(20),
+        padding: width > height ? scale(height / width * 16) : verticalScale(width / height * 16),
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? moderateScale(15) : moderateScale(28),
+        fontSize: width > height ? scale(height / width * 18) : verticalScale(width / height * 50),
         color: "#999999",
         fontWeight: "bold",       
     }

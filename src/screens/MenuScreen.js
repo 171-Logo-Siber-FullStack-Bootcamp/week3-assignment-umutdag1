@@ -4,16 +4,21 @@ import React from 'react'
 export default function MenuScreen() {
     return (
         <View style={styles.container}>
-            <View style={styles.subContainer}>
-                <Text style={styles.mainText}>MENÜ</Text>
+            <View style={[styles.topContainer, styles.shadow]}>
+                <Text style={styles.mainText}>MENU</Text>
+            </View>
+            <View style={[styles.bottomContainer]}>
                 <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>KAYIT OL</Text>
+                    <Text style={styles.buttonText}>KULLANICI LİSTESİ</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>KAYIT OL</Text>
+                    <Text style={styles.buttonText}>POST LİSTESİ</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>KAYIT OL</Text>
+                    <Text style={styles.buttonText}>ALBUM LİSTESİ</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
+                    <Text style={styles.buttonText}>YORUM LİSTESİ</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -37,33 +42,49 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        justifyContent: "space-around",
-        alignItems: "center",
         backgroundColor: "#344955"
     },
-    subContainer: {
+    topContainer: {
+        flex: 2,
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        backgroundColor: "#344955",
+    },
+    bottomContainer: {
+        flex: 8,
         flexDirection: "column",
         justifyContent: "space-evenly",
         alignItems: "center",
-        height: width > height ? height - (height / 5) : height - (height / 10),
-        width: width > height ? width - (width / 10) : width - (width / 5),
-        borderRadius: 10,
         backgroundColor: "#4A6572",
+    },
+    shadow: {
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 24,
     },
     mainText: {
         color: "#eeeeee",
-        fontSize: width > height ? moderateScale(25) : moderateScale(50),
+        marginLeft: "3%",
+        fontSize: width > height ? moderateScale(25) : moderateScale(55),
         fontWeight: "bold",
+        //fontFamily: "Times New Roman",
     },
     button: {
         backgroundColor: "#eeeeee",
         textAlign: "center",
         width: "50%",
-        padding: width > height ? moderateScale(10) : moderateScale(20),
+        padding: width > height ? scale(height / width * 16) : verticalScale(width / height * 16),
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? moderateScale(15) : moderateScale(20),
+        fontSize: width > height ? scale(height / width * 18) : verticalScale(width / height * 50),
         color: "#999999",
         fontWeight: "bold",
     }
