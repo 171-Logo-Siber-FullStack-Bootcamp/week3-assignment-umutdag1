@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? scale(height / width * 25) : verticalScale(width / height * 50),
+        fontSize: width > height ? scale(height / width * 20) : verticalScale(width / height * 50),
         color: "#999999",
         fontWeight: "bold",       
     }
