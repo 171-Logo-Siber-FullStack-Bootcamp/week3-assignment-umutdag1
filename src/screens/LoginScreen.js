@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#eeeeee",
         textAlign: "center",
         width: "50%",
-        padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 16),
+        padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 40),
         borderRadius: 10
     },
     buttonText: {
