@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     mainText: {
         color: "#eeeeee",
         marginLeft: "3%",
-        fontSize: width > height ? scale(height / width * 40) : verticalScale(width / height * 80),
+        fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70),
         fontWeight: "bold",
         //fontFamily: "Times New Roman",
     },
@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#eeeeee",
         textAlign: "center",
         width: "50%",
-        padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 16),
+        padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
         borderRadius: 10
     },
     buttonText: {
-        fontSize: width > height ? scale(height / width * 20) : verticalScale(width / height * 50),
+        fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
         color: "#999999",
         fontWeight: "bold",
     }
