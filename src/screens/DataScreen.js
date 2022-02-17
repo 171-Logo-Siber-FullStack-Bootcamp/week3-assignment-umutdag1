@@ -1,26 +1,15 @@
 /* Fundamentals */
-import { Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { Dimensions, StyleSheet, View, Text}from 'react-native';
 import React from 'react'
 
-export default function MenuScreen() {
+export default function DataScreen(props) {
     return (
         <View style={styles.container}>
             <View style={[styles.topContainer, styles.shadow]}>
-                <Text style={styles.mainText}>MENU</Text>
+                <Text style={styles.mainText}>DATA HEADER</Text>
             </View>
             <View style={[styles.bottomContainer]}>
-                <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>KULLANICI LİSTESİ</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>POST LİSTESİ</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>ALBUM LİSTESİ</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.button]} activeOpacity={0.7}>
-                    <Text style={styles.buttonText}>YORUM LİSTESİ</Text>
-                </TouchableOpacity>
+                
             </View>
         </View>
     )
