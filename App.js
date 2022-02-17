@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 /* Screens */
-import LoginScreen from './src/screens/LoginScreen';
+import MainScreen from './src/screens/MainScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import DataScreen from './src/screens/DataScreen';
 
