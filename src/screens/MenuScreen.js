@@ -1,5 +1,5 @@
 /* Fundamentals */
-import { Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 export default function MenuScreen(props) {
@@ -18,9 +18,9 @@ export default function MenuScreen(props) {
         },
         topContainer: {
             flex: 2,
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
             backgroundColor: "#344955",
         },
         bottomContainer: {
@@ -78,7 +78,7 @@ export default function MenuScreen(props) {
                                 method: "GET"
                             }
                         },
-                        merge: true
+                        merge: true,
                     })}
                 >
                     <Text style={styles.buttonText}>USERS LIST</Text>

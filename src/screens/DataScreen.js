@@ -1,5 +1,5 @@
 /* Fundamentals */
-import { Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
+import { Platform, Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 /* Externals */
 import Jhr from '../libs/Jhr';
@@ -16,7 +16,7 @@ export default function DataScreen(props) {
         method: params?.request?.method ? params.request.method : 'undefined'
     };
 
-    let [data, setData] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         const url = "https://jsonplaceholder.typicode.com/" + request.name;
@@ -37,6 +37,7 @@ export default function DataScreen(props) {
         }
     }, [request.name]);
 
+
     const isDataEmpty = data && data.length > 0;
 
     const styles = StyleSheet.create({
@@ -47,9 +48,9 @@ export default function DataScreen(props) {
         },
         topContainer: {
             flex: 2,
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
             backgroundColor: "#344955",
         },
         bottomContainer: {

@@ -1,17 +1,19 @@
-import { Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+/* Fundamentals */
+import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-export default function LoginScreen(props) {
+export default function MainScreen(props) {
 
     const params = props?.route?.params;
-    
+    const navigation = props?.navigation;
+
     const { width, height } = Dimensions.get('window');
     const { scale, verticalScale, moderateScale } = props?.scales;
 
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            flexDirection : "column"
+            flexDirection: "column"
         },
         topContainer: {
             flex: 6,
@@ -48,12 +50,12 @@ export default function LoginScreen(props) {
         },
         subText: {
             color: "#eeeeee",
-            fontSize:  width > height ? scale(height / width * 30) : verticalScale(width / height * 60),
+            fontSize: width > height ? scale(height / width * 30) : verticalScale(width / height * 60),
             fontWeight: "bold"
         },
         innerText: {
             textAlignVertical: "center",
-            fontFamily: "Times New Roman",
+            fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Times New Roman',
         },
         button: {
             backgroundColor: "#eeeeee",
@@ -65,7 +67,7 @@ export default function LoginScreen(props) {
         buttonText: {
             fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             color: "#999999",
-            fontWeight: "bold",       
+            fontWeight: "bold",
         }
     });
 
@@ -89,10 +91,18 @@ export default function LoginScreen(props) {
 
             <View style={[styles.bottomContainer]}>
                 <View style={[styles.bottomWindow]}>
-                    <TouchableOpacity style={[styles.button, {opacity : 0.5}]} activeOpacity={0.7} disabled={true}>
+                    <TouchableOpacity
+                        style={[styles.button, { opacity: 0.5 }]}
+                        activeOpacity={0.7}
+                        disabled={true}
+                    >
                         <Text style={styles.buttonText}>REGISTER</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        activeOpacity={0.7}
+                        onPress={() => navigation.navigate('Login')}
+                    >
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
