@@ -1,6 +1,8 @@
 /* Fundamentals */
 import { Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
+/* Externals */
+import Jhr from '../libs/Jhr';
 
 export default function DataScreen(props) {
 
@@ -9,40 +11,33 @@ export default function DataScreen(props) {
     const { width, height } = Dimensions.get('window');
     const { scale, verticalScale, moderateScale } = props?.scales;
 
-    console.log(params);
+    const request = {
+        name: params?.request?.name ? params.request.name : 'undefined',
+        method: params?.request?.method ? params.request.method : 'undefined'
+    };
 
-    const requestName = params?.request?.name ? params.request.name : 'undefined';
-    const requestUrl = params?.request?.url ? params.request.url : 'undefined';
-    const requestMethod = params?.request?.method ? params.request.method : 'undefined';
+    let [data, setData] = useState(null);
 
+    useEffect(() => {
+        const url = "https://jsonplaceholder.typicode.com/" + request.name;
+        const myJhr = new Jhr(url, request.method);
 
-    const DATA = [
-        {
-            id: '1',
-            title: 'First Item',
-        },
-        {
-            id: '2',
-            title: 'Second Item',
-        },
-    ];
+        switch (request.method) {
+            case 'GET':
+                myJhr.fetchResponse()
+                    .then(result => {
+                        setData(result.data);
+                    })
+                    .catch(err => {
+                        setData([]);
+                    });
+                break;
+            default:
+                break;
+        }
+    }, [request.name]);
 
-    const flatListCondition = DATA.length > 2;
-
-    const DataItem = ({ data }) => (
-        <View style={styles.dataContainer}>
-            <Text>
-                <Text style={styles.keyText}>id</Text>
-                <Text style={styles.keyText}>:</Text>
-                <Text style={styles.dataText}>{data.id}</Text>
-            </Text>
-            <Text>
-                <Text style={styles.keyText}>title</Text>
-                <Text style={styles.keyText}>:</Text>
-                <Text style={styles.dataText}>{data.title}</Text>
-            </Text>
-        </View>
-    );
+    const isDataEmpty = data && data.length > 0;
 
     const styles = StyleSheet.create({
         container: {
@@ -60,8 +55,8 @@ export default function DataScreen(props) {
         bottomContainer: {
             flex: 8,
             flexDirection: "column",
-            justifyContent: flatListCondition ? "flex-start" : "space-evenly",
-            alignItems: flatListCondition ? "stretch" : "center",
+            justifyContent: isDataEmpty ? "space-evenly" : "center",
+            alignItems: "center",
             backgroundColor: "#4A6572",
         },
         dataContainer: {
@@ -69,7 +64,7 @@ export default function DataScreen(props) {
             padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             backgroundColor: "#eeeeee",
             borderRadius: 10,
-            marginVertical: flatListCondition ? 8 : 0
+            marginVertical: 8
         },
         shadow: {
             shadowColor: "#000000",
@@ -87,7 +82,6 @@ export default function DataScreen(props) {
             marginLeft: "3%",
             fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70),
             fontWeight: "bold",
-            //fontFamily: "Times New Roman",
         },
         keyText: {
             color: "#666666",
@@ -103,22 +97,42 @@ export default function DataScreen(props) {
         }
     });
 
-
+    const DataItem = ({ data }) => (
+        <View style={styles.dataContainer}>
+            {
+                Object.keys(data).map((key, index) => {
+                    return (
+                        <Text key={index}>
+                            <Text style={styles.keyText}>{key}</Text>
+                            <Text style={styles.keyText}>:</Text>
+                            <Text style={styles.dataText}>
+                                {
+                                    typeof data[key] === 'object' ?
+                                        JSON.stringify(data[key]) :
+                                        data[key]
+                                }
+                            </Text>
+                        </Text>
+                    )
+                })
+            }
+        </View>
+    );
 
     return (
         <View style={styles.container}>
             <View style={[styles.topContainer, styles.shadow]}>
-                <Text style={styles.mainText}>{requestName.toUpperCase()}</Text>
+                <Text style={styles.mainText}>{request.name.toUpperCase()}</Text>
             </View>
             <View style={[styles.bottomContainer]}>
                 {
-                    flatListCondition ?
+                    isDataEmpty ?
                         (
                             <FlatList
-                                data={DATA}
+                                data={data}
                                 renderItem={({ item }) => <DataItem data={item}></DataItem>}
-                                keyExtractor={item => item.id}
-                                numColumns={DATA.length}
+                                numColumns={data.length}
+                                key={data.length}
                                 columnWrapperStyle={{
                                     flexDirection: "column",
                                     alignItems: "center",
@@ -126,13 +140,16 @@ export default function DataScreen(props) {
                             />
                         ) :
                         (
-                            DATA.map((item, index) => (
-                                <DataItem data={item} key={index}></DataItem>
-                            ))
+                            <View style={styles.dataContainer}>
+                                <Text>
+                                    <Text style={styles.keyText}>error</Text>
+                                    <Text style={styles.keyText}>:</Text>
+                                    <Text style={styles.dataText}>{data ? "No Data" : "Undefined"}</Text>
+                                </Text>
+                            </View>
                         )
                 }
             </View>
-
         </View>
     );
 }

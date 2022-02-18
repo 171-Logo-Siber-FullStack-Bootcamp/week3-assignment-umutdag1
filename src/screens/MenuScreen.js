@@ -48,7 +48,6 @@ export default function MenuScreen(props) {
             marginLeft: "3%",
             fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70),
             fontWeight: "bold",
-            //fontFamily: "Times New Roman",
         },
         button: {
             backgroundColor: "#eeeeee",
@@ -78,7 +77,6 @@ export default function MenuScreen(props) {
                         params: {
                             request: {
                                 name: "users",
-                                url: "https://jsonplaceholder.typicode.com/users",
                                 method: "GET"
                             }
                         },
@@ -90,21 +88,48 @@ export default function MenuScreen(props) {
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate('Data')}
+                    onPress={() => navigation.navigate({
+                        name: 'Data',
+                        params: {
+                            request: {
+                                name: "posts",
+                                method: "GET"
+                            }
+                        },
+                        merge: true
+                    })}
                 >
                     <Text style={styles.buttonText}>POSTS LIST</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate('Data')}
+                    onPress={() => navigation.navigate({
+                        name: 'Data',
+                        params: {
+                            request: {
+                                name: "albums",
+                                method: "GET"
+                            }
+                        },
+                        merge: true
+                    })}
                 >
                     <Text style={styles.buttonText}>ALBUMS LIST</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate('Data')}
+                    onPress={() => navigation.navigate({
+                        name: 'Data',
+                        params: {
+                            request: {
+                                name: "comments",
+                                method: "GET"
+                            }
+                        },
+                        merge: true
+                    })}
                 >
                     <Text style={styles.buttonText}>COMMENTS LIST</Text>
                 </TouchableOpacity>

@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet } from 'react-native';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-/* Externals */
+/* NPMs */
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
