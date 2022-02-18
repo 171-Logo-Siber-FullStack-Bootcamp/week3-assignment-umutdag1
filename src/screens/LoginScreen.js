@@ -77,6 +77,7 @@ export default function LoginScreen(props) {
             fontSize: width > height ? scale(height / width * 12) : verticalScale(width / height * 24),
             color: "#999999",
             fontWeight: "bold",
+            textAlign: "center",
         }
     });
 

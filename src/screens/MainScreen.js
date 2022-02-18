@@ -59,7 +59,6 @@ export default function MainScreen(props) {
         },
         button: {
             backgroundColor: "#eeeeee",
-            textAlign: "center",
             width: "50%",
             padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             borderRadius: 10
@@ -68,6 +67,7 @@ export default function MainScreen(props) {
             fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             color: "#999999",
             fontWeight: "bold",
+            textAlign: "center",
         }
     });
 

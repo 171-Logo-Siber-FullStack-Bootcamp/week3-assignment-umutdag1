@@ -58,6 +58,7 @@ export default function MenuScreen(props) {
             fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             color: "#999999",
             fontWeight: "bold",
+            textAlign: "center",
         }
     });
 

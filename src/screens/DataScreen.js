@@ -12,31 +12,26 @@ export default function DataScreen(props) {
     const { scale, verticalScale, moderateScale } = props?.scales;
 
     const request = {
-        name: params?.request?.name ? params.request.name : 'undefined',
-        method: params?.request?.method ? params.request.method : 'undefined'
+        name: params?.request?.name,
+        method: params?.request?.method
     };
 
     const [data, setData] = useState(null);
 
     useEffect(() => {
         const url = "https://jsonplaceholder.typicode.com/" + request.name;
-        const myJhr = new Jhr(url, request.method);
+        const myJhr = new Jhr(url, request.method ? request.method : 'undefined');
 
-        switch (request.method) {
-            case 'GET':
-                myJhr.fetchResponse()
-                    .then(result => {
-                        setData(result.data);
-                    })
-                    .catch(err => {
-                        setData([]);
-                    });
-                break;
-            default:
-                break;
+        const data = async () => await myJhr.fetchResponse()
+
+        if (request.method === 'GET') {
+            data()
+                .then(result => setData(result.data))
+                .catch(err => setData([]));
         }
     }, [request.name]);
 
+    console.log("Test");
 
     const isDataEmpty = data && data.length > 0;
 
@@ -57,7 +52,7 @@ export default function DataScreen(props) {
             flex: 8,
             flexDirection: "column",
             justifyContent: isDataEmpty ? "space-evenly" : "center",
-            alignItems: "center",
+            alignItems: isDataEmpty ? "stretch" : "center",
             backgroundColor: "#4A6572",
         },
         dataContainer: {
@@ -103,17 +98,17 @@ export default function DataScreen(props) {
             {
                 Object.keys(data).map((key, index) => {
                     return (
-                        <Text key={index}>
+                        <View style={{ flexDirection: "row", flexWrap: "wrap" }} key={index}>
                             <Text style={styles.keyText}>{key}</Text>
                             <Text style={styles.keyText}>:</Text>
                             <Text style={styles.dataText}>
                                 {
                                     typeof data[key] === 'object' ?
-                                        JSON.stringify(data[key]) :
+                                        data[key].toString() :
                                         data[key]
                                 }
                             </Text>
-                        </Text>
+                        </View>
                     )
                 })
             }
@@ -123,30 +118,41 @@ export default function DataScreen(props) {
     return (
         <View style={styles.container}>
             <View style={[styles.topContainer, styles.shadow]}>
-                <Text style={styles.mainText}>{request.name.toUpperCase()}</Text>
+                <Text style={styles.mainText}>{request.name ? request.name.toUpperCase() : "UNDEFINED"}</Text>
             </View>
             <View style={[styles.bottomContainer]}>
                 {
-                    isDataEmpty ?
-                        (
-                            <FlatList
-                                data={data}
-                                renderItem={({ item }) => <DataItem data={item}></DataItem>}
-                                numColumns={data.length}
-                                key={data.length}
-                                columnWrapperStyle={{
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                }}
-                            />
+                    request.name ?
+                        (isDataEmpty ?
+                            (
+                                <FlatList
+                                    data={data}
+                                    renderItem={({ item }) => <DataItem data={item}></DataItem>}
+                                    numColumns={data.length}
+                                    key={data.length}
+                                    columnWrapperStyle={{
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                    }}
+                                />
+                            ) :
+                            (
+                                <View style={styles.dataContainer}>
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Text style={styles.keyText}>error</Text>
+                                        <Text style={styles.keyText}>:</Text>
+                                        <Text style={styles.dataText}>No Data</Text>
+                                    </View>
+                                </View>
+                            )
                         ) :
                         (
                             <View style={styles.dataContainer}>
-                                <Text>
+                                <View style={{ flexDirection: "row" }}>
                                     <Text style={styles.keyText}>error</Text>
                                     <Text style={styles.keyText}>:</Text>
-                                    <Text style={styles.dataText}>{data ? "No Data" : "Undefined"}</Text>
-                                </Text>
+                                    <Text style={styles.dataText}>Undefined</Text>
+                                </View>
                             </View>
                         )
                 }

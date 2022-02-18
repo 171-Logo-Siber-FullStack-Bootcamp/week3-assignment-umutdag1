@@ -18,6 +18,8 @@ export default function LayoutScreen(props) {
 
     const Tab = createBottomTabNavigator();
 
+    console.log("layout Test");
+
     return (
         <NavigationContainer independent={true}>
           <Tab.Navigator >
