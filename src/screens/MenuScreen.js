@@ -7,8 +7,6 @@ export default function MenuScreen(props) {
     const params = props?.route?.params;
     const navigation = props?.navigation;
 
-    console.log(props);
-
     const { width, height } = Dimensions.get('window');
     const { scale, verticalScale, moderateScale } = props?.scales;
 
