@@ -1,6 +1,7 @@
 /* Fundamentals */
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 /* Externals */
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,60 +11,50 @@ import MainScreen from './src/screens/MainScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import DataScreen from './src/screens/DataScreen';
 
-//import BackgroundImage from './assets/json.png';
-
 // https://github.com/oblador/react-native-vector-icons/blob/master/glyphmaps/MaterialCommunityIcons.json --> Icons
 
 export default function App() {
-  
+
   const Tab = createBottomTabNavigator();
 
-  const bottomNavigation = (
+  const { width, height } = Dimensions.get('window');
+
+  //Guideline sizes are based on standard ~5" screen mobile device
+  const guidelineBaseWidth = 350;
+  const guidelineBaseHeight = 680;
+
+  const scale = (size, screenWidth = width) => screenWidth / guidelineBaseWidth * size;
+  const verticalScale = (size, screenHeight = height) => screenHeight / guidelineBaseHeight * size;
+  const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * factor;
+
+  console.log("aa");
+
+  return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
           name="Menu"
-          component={MenuScreen}
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="menu" color={color} size={size} />
             ),
           }}
-        />
+        >
+          {props => <MenuScreen {...props} scales={{ scale, verticalScale, moderateScale }}></MenuScreen>}
+        </Tab.Screen>
         <Tab.Screen
           name="Data"
-          component={DataScreen}
           options={{
             headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="code-json" color={color} size={size} />
             ),
           }}
-        />
+        >
+          {props => <DataScreen {...props} scales={{ scale, verticalScale, moderateScale }}></DataScreen>}
+        </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
-  )
-
-  return (
-    bottomNavigation
-    // <View style={styles.container}>
-    //   {/* <LoginScreen></LoginScreen> */}
-    //   {/* <MenuScreen></MenuScreen> */}
-    //   <DataScreen bottomNavigation={bottomNavigation}></DataScreen>
-    //   {/* <ImageBackground source={BackgroundImage} resizeMode="center" imageStyle={{opacity : 1}} style={styles.backgroundImage}>
-
-    //   </ImageBackground> */}
-    // </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-
-  },
-  backgroundImage: {
-    flex: 1,
-  }
-});
