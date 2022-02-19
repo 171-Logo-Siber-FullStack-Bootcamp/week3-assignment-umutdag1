@@ -90,12 +90,12 @@ export default function DataScreen(props) {
             marginLeft: 6,
             fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             fontWeight: "bold",
-            flexShrink: 1
+            flexShrink: 1,
         }
     });
 
     const DataItem = ({ data }) => (
-        <View style={styles.dataContainer}>
+        <View style={[styles.dataContainer]}>
             {
                 Object.keys(data).map((key, index) => {
                     return (
