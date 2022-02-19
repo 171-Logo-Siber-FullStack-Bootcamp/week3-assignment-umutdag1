@@ -2,6 +2,8 @@
   "expo": {
     "name": "week3-assignment-umutdag1",
     "slug": "week3-assignment-umutdag1",
+    "privacy" : "public",
+    "description" : "A Bootcamp React Native Homework",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
