@@ -71,15 +71,14 @@ export default function MenuScreen(props) {
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate({
-                        name: 'Data',
+                    onPress={() => navigation.navigate('Layout', {
+                        screen: 'Data',
                         params: {
                             request: {
                                 name: "users",
                                 method: "GET"
                             }
                         },
-                        merge: true,
                     })}
                 >
                     <Text style={styles.buttonText}>USERS LIST</Text>
@@ -87,8 +86,8 @@ export default function MenuScreen(props) {
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate({
-                        name: 'Data',
+                    onPress={() => navigation.navigate('Layout',{
+                        screen: 'Data',
                         params: {
                             request: {
                                 name: "posts",
@@ -103,8 +102,8 @@ export default function MenuScreen(props) {
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate({
-                        name: 'Data',
+                    onPress={() => navigation.navigate('Layout',{
+                        screen: 'Data',
                         params: {
                             request: {
                                 name: "albums",
@@ -119,8 +118,8 @@ export default function MenuScreen(props) {
                 <TouchableOpacity
                     style={[styles.button]}
                     activeOpacity={0.7}
-                    onPress={() => navigation.navigate({
-                        name: 'Data',
+                    onPress={() => navigation.navigate('Layout',{
+                        screen: 'Data',
                         params: {
                             request: {
                                 name: "comments",

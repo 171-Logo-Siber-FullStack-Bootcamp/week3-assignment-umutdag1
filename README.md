@@ -4,3 +4,27 @@
 - Login ve Menu kısımlarının bulanacağı React Native App oluşturulacak
 - JSONPlaceholder API ve axios kullanarak postlar listelenecek
 - Son tarih: 20.02.2022 14:00
+
+## React Native Assignment - Week 3 (React Native Ödevi - Hafta 3)
+
+This homework is done by umutdag1 for 171-Logo-Cyber-FullStack-Bootcamp - week 3's assignment.
+
+(Bu ödev umutdag1 tarafından 171-Logo-Siber-FullStack-Bootcamp - hafta 3 ödevi için yapılmıştır.)
+
+## Installation (Yükleme)
+
+Use the git clone command to clone the project to local.
+
+(Projeyi bilgisayara klonlamak için git clone komutunu kullanın.)
+
+```bash
+git clone https://github.com/171-Logo-Siber-FullStack-Bootcamp/week3-assignment-umutdag1
+```
+
+## Usage (Kullanım)
+
+```bash
+cd week3-assignment-umutdag1
+npm i
+npm start
+```

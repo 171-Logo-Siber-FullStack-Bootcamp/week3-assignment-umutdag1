@@ -1,5 +1,5 @@
 /* Fundamentals */
-import { Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
+import { Platform, Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 /* Externals */
 import Jhr from '../libs/Jhr'; // This Library Uses An Axios Object as It's classed.
@@ -34,7 +34,7 @@ export default function DataScreen(props) {
         if (request.method === 'GET') { // It'll be Runing If Requested Method is GET
             callUpdateData();
         }
-
+        
     }, [request.name]);
 
     const isDataEmpty = data && data.length > 0; // Setting Rule For Responsive Settings are Executed
@@ -109,9 +109,14 @@ export default function DataScreen(props) {
                             <Text style={styles.keyText}>:</Text>
                             <Text style={styles.dataText}>
                                 {
-                                    typeof data[key] === 'object' ? // Converting to String if Data is an Object
-                                        JSON.stringify(data[key]) :
-                                        data[key]
+                                    typeof data[key] !== 'object' ? // Converting to String if Data is an Object
+                                        data[key] :
+                                        (
+                                            // Because of Text is Out of Box On Web, It Checks if OS is either ios or android
+                                            ['android', 'ios'].includes(Platform.OS) ?
+                                                JSON.stringify(data[key]) :
+                                                data[key].toString()
+                                        )
                                 }
                             </Text>
                         </View>
@@ -146,7 +151,7 @@ export default function DataScreen(props) {
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={styles.keyText}>error</Text>
                                     <Text style={styles.keyText}>:</Text>
-                                    <Text style={styles.dataText}>{request.name ? "No Data" : "Undefined"}</Text>
+                                    <Text style={styles.dataText}>{request.name ? "No Data" : "Click a Menu's Button"}</Text>
                                 </View>
                             </View>
                         )

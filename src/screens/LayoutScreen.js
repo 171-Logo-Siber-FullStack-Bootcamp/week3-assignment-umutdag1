@@ -1,6 +1,6 @@
 /* Fundamentals */
 import { Dimensions } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 /* Externals */
 //import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -20,6 +20,14 @@ export default function LayoutScreen(props) {
 
   const Tab = createBottomTabNavigator(); // Creating Tab Screen Navigator
 
+  const [outerParams, setOuterParams] = useState(null);
+
+  useEffect(() => {
+    if (params?.fullName) {
+      setOuterParams(prev => ({ ...prev, fullName: params.fullName }));
+    }
+  }, [params.fullName])
+
   return (
     <Tab.Navigator initialRouteName='Home'>
       <Tab.Screen
@@ -31,7 +39,7 @@ export default function LayoutScreen(props) {
           ),
         }}
       >
-        {props => <HomeScreen {...props} outerParams={params} scales={{ scale, verticalScale, moderateScale }}></HomeScreen>}
+        {props => <HomeScreen {...props} outerParams={outerParams} scales={{ scale, verticalScale, moderateScale }}></HomeScreen>}
       </Tab.Screen>
       <Tab.Screen
         name="Menu"
