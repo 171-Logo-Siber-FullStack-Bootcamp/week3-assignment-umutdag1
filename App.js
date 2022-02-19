@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Dimensions, StyleSheet } from 'react-native';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-/* NPMs */
+/* Externals */
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 /* Screens*/

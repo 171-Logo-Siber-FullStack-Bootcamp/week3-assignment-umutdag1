@@ -1,5 +1,8 @@
+/* Fundamentals */
 import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState, useEffect } from 'react';
+/* Externals */
+import FirebaseConn from '../../firebase';
 
 export default function LoginScreen(props) {
 
@@ -54,7 +57,7 @@ export default function LoginScreen(props) {
             backgroundColor: "#dddddd",
             textAlign: "center",
             width: "60%",
-            fontSize : width > height ? scale(height / width * 12) : verticalScale(width / height * 24),
+            fontSize: width > height ? scale(height / width * 12) : verticalScale(width / height * 24),
             padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 20),
             marginVertical: 10
         },
@@ -62,7 +65,7 @@ export default function LoginScreen(props) {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            marginVertical : width > height ? scale(height / width * 30) : verticalScale(width / height * 60)
+            marginVertical: width > height ? scale(height / width * 30) : verticalScale(width / height * 60)
         },
         button: {
             backgroundColor: "#eeeeee",
@@ -70,8 +73,8 @@ export default function LoginScreen(props) {
             padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             borderRadius: 10,
             fontWeight: "bold",
-            width : "25%",
-            marginHorizontal : 12
+            width: "25%",
+            marginHorizontal: 12
         },
         buttonText: {
             fontSize: width > height ? scale(height / width * 12) : verticalScale(width / height * 24),
@@ -80,6 +83,13 @@ export default function LoginScreen(props) {
             textAlign: "center",
         }
     });
+
+    const loginAuth = async () => {
+        const usersSnapShot = await FirebaseConn.getDocs(
+            FirebaseConn.collection(FirebaseConn.db, "users")
+        );
+        usersSnapShot.forEach(doc => console.log(doc.data()));
+    }
 
     return (
         <View style={styles.container}>
@@ -102,7 +112,8 @@ export default function LoginScreen(props) {
                     <TouchableOpacity
                         style={[styles.button]}
                         activeOpacity={0.7}
-                        onPress={() => navigation.navigate('Layout')}
+                        onPress={loginAuth}
+                        //onPress={() => navigation.navigate('Layout')}
                     >
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>

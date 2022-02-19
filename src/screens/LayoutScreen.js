@@ -1,7 +1,7 @@
 /* Fundamentals */
 import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
-/* NPMs */
+/* Externals */
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
