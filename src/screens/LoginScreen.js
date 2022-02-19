@@ -20,14 +20,16 @@ export default function LoginScreen(props) {
 
     // It will be run If Login Button is Clicked
     const loginAuth = async () => {
+        // Getting Users From Requested Firebase
         const usersSnapShot = await FirebaseConn.getDocs(
             FirebaseConn.collection(FirebaseConn.db, "users")
-        ); // Getting Users From Requested Firebase
+        ); 
+        // If user is Matched Then Assing it Matched Doc, Else undefined
         const resultDoc = usersSnapShot.docs.find(doc => {
             const docData = doc.data();
             return docData.email === user.email &&
                 docData.password === user.password
-        }); // If user is Matched Then Assing it Matched Doc, Else undefined
+        }); 
         const result = resultDoc?.data(); // Getting Data From Doc
         if (result) { // If Result is Neither undefined or null
             // Go to Layout Screen With Params of Matched fullName Obtained From Doc
