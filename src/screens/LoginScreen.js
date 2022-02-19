@@ -14,8 +14,8 @@ export default function LoginScreen(props) {
 
      // Initiliaze user of State Data in Functional Programming
     const [user, setUser] = useState({
-        email: 'test@gmail.com',
-        password: ''
+        email: 'test@gmail.com', // Assign it to Empty String If You Want
+        password: '123456' // Assign it to Empty String If You Want
     });
 
     // It will be run If Login Button is Clicked
