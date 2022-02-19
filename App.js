@@ -1,6 +1,6 @@
 /* Fundamentals */
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, LogBox  } from 'react-native';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 /* Externals */
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,6 +13,8 @@ import LayoutScreen from './src/screens/LayoutScreen';
 // https://github.com/oblador/react-native-vector-icons/blob/master/glyphmaps/MaterialCommunityIcons.json --> Icons
 
 export default function App() {
+
+  LogBox.ignoreAllLogs();
 
   const { width, height } = Dimensions.get('window');
 

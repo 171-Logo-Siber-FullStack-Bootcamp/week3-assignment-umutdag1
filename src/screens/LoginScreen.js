@@ -1,5 +1,5 @@
 /* Fundamentals */
-import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput} from 'react-native';
 import React, { useState, useEffect } from 'react';
 /* Externals */
 import FirebaseConn from '../../firebase';
@@ -11,6 +11,42 @@ export default function LoginScreen(props) {
 
     const { width, height } = Dimensions.get('window');
     const { scale, verticalScale, moderateScale } = props?.scales;
+
+    const [user, setUser] = useState({
+        email: 'test@gmail.com',
+        password: ''
+    });
+
+    console.log(user);
+
+    const loginAuth = async () => {
+        console.log(user);
+        const usersSnapShot = await FirebaseConn.getDocs(
+            FirebaseConn.collection(FirebaseConn.db, "users")
+        );
+        const resultDoc = usersSnapShot.docs.find(doc => {
+            const docData = doc.data();
+            return docData.email === user.email &&
+                docData.password === user.password
+        });
+        const result = resultDoc?.data();
+        if (result) {
+            console.log(result);
+            navigation.navigate({
+                name: 'Layout',
+                params: { 
+                    fullName: `${result.name} ${result.surname}`
+                 },
+                merge: true,
+            });
+        } else {
+            setUser({
+                email: '',
+                password: ''
+            });
+        }
+    }
+    console.log("dsadasd");
 
     const styles = StyleSheet.create({
         container: {
@@ -77,19 +113,12 @@ export default function LoginScreen(props) {
             marginHorizontal: 12
         },
         buttonText: {
-            fontSize: width > height ? scale(height / width * 12) : verticalScale(width / height * 24),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             color: "#999999",
             fontWeight: "bold",
             textAlign: "center",
         }
     });
-
-    const loginAuth = async () => {
-        const usersSnapShot = await FirebaseConn.getDocs(
-            FirebaseConn.collection(FirebaseConn.db, "users")
-        );
-        usersSnapShot.forEach(doc => console.log(doc.data()));
-    }
 
     return (
         <View style={styles.container}>
@@ -100,20 +129,24 @@ export default function LoginScreen(props) {
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
-                        placeholder={"Username"}
+                        placeholder={"Email"}
+                        onChangeText={email => setUser(prev => ({ ...prev, email }))}
+                        value={user.email}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder={"Password"}
                         secureTextEntry={true}
+                        onChangeText={password => setUser(prev => ({ ...prev, password }))}
+                        value={user.password}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={[styles.button]}
                         activeOpacity={0.7}
-                        //onPress={loginAuth}
-                        onPress={() => navigation.navigate('Layout')}
+                        onPress={() => loginAuth()}
+                    //onPress={() => navigation.navigate('Layout')}
                     >
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>

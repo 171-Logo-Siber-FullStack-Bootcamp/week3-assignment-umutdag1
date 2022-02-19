@@ -8,44 +8,53 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 /* Screens */
 import MenuScreen from './MenuScreen';
 import DataScreen from './DataScreen';
+import HomeScreen from './HomeScreen';
 
 export default function LayoutScreen(props) {
 
-    const params = props?.route?.params;
+  const params = props?.route?.params;
+  const navigation = props?.navigation;
 
-    const { width, height } = Dimensions.get('window');
-    const { scale, verticalScale, moderateScale } = props?.scales;
+  const { width, height } = Dimensions.get('window');
+  const { scale, verticalScale, moderateScale } = props?.scales;
 
-    const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator();
 
-    console.log("layout Test");
-
-    return (
-        <NavigationContainer independent={true}>
-          <Tab.Navigator >
-            <Tab.Screen
-              name="Menu"
-              options={{
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons name="menu" color={color} size={size} />
-                ),
-              }}
-            >
-              {props => <MenuScreen {...props} scales={{ scale, verticalScale, moderateScale }}></MenuScreen>}
-            </Tab.Screen>
-            <Tab.Screen
-              name="Data"
-              options={{
-                headerShown: false,
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons name="code-json" color={color} size={size} />
-                )
-              }}
-            >
-              {props => <DataScreen {...props} scales={{ scale, verticalScale, moderateScale }}></DataScreen>}
-            </Tab.Screen>
-          </Tab.Navigator>
-        </NavigationContainer>
-      );
+  return (
+    <Tab.Navigator initialRouteName='Home'>
+      <Tab.Screen
+        name="Home"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      >
+        {props => <HomeScreen {...props} outerParams={params} scales={{ scale, verticalScale, moderateScale }}></HomeScreen>}
+      </Tab.Screen>
+      <Tab.Screen
+        name="Menu"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="menu" color={color} size={size} />
+          ),
+        }}
+      >
+        {props => <MenuScreen {...props} scales={{ scale, verticalScale, moderateScale }}></MenuScreen>}
+      </Tab.Screen>
+      <Tab.Screen
+        name="Data"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="code-json" color={color} size={size} />
+          )
+        }}
+      >
+        {props => <DataScreen {...props} scales={{ scale, verticalScale, moderateScale }}></DataScreen>}
+      </Tab.Screen>
+    </Tab.Navigator>
+  );
 }

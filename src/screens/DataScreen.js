@@ -16,22 +16,22 @@ export default function DataScreen(props) {
         method: params?.request?.method
     };
 
-    const [data, setData] = useState(null);
+    const [data, updateData] = useState(null);
 
     useEffect(() => {
         const url = "https://jsonplaceholder.typicode.com/" + request.name;
         const myJhr = new Jhr(url, request.method ? request.method : 'undefined');
 
-        const data = async () => await myJhr.fetchResponse()
+        const callUpdateData = async () => {
+            const result = await myJhr.fetchResponse();
+            updateData(result.data);
+        }
 
         if (request.method === 'GET') {
-            data()
-                .then(result => setData(result.data))
-                .catch(err => setData([]));
+            callUpdateData();
         }
-    }, [request.name]);
 
-    console.log("Test");
+    }, [request.name]);
 
     const isDataEmpty = data && data.length > 0;
 
