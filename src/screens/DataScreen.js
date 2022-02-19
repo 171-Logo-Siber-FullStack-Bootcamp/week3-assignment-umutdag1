@@ -56,7 +56,7 @@ export default function DataScreen(props) {
             backgroundColor: "#4A6572",
         },
         dataContainer: {
-            width: "70%",
+            width: "95%",
             padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             backgroundColor: "#eeeeee",
             borderRadius: 10,
@@ -81,15 +81,16 @@ export default function DataScreen(props) {
         },
         keyText: {
             color: "#666666",
-            marginLeft: "3%",
+            marginLeft: 6,
             fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             fontWeight: "bold",
         },
         dataText: {
             color: "#aaaaaa",
-            marginLeft: "3%",
+            marginLeft: 6,
             fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
             fontWeight: "bold",
+            flexShrink: 1
         }
     });
 
@@ -98,13 +99,13 @@ export default function DataScreen(props) {
             {
                 Object.keys(data).map((key, index) => {
                     return (
-                        <View style={{ flexDirection: "row", flexWrap: "wrap" }} key={index}>
+                        <View style={{ flexDirection: "row" }} key={index}>
                             <Text style={styles.keyText}>{key}</Text>
                             <Text style={styles.keyText}>:</Text>
                             <Text style={styles.dataText}>
                                 {
                                     typeof data[key] === 'object' ?
-                                        data[key].toString() :
+                                        JSON.stringify(data[key]) :
                                         data[key]
                                 }
                             </Text>
@@ -122,36 +123,25 @@ export default function DataScreen(props) {
             </View>
             <View style={[styles.bottomContainer]}>
                 {
-                    request.name ?
-                        (isDataEmpty ?
-                            (
-                                <FlatList
-                                    data={data}
-                                    renderItem={({ item }) => <DataItem data={item}></DataItem>}
-                                    numColumns={data.length}
-                                    key={data.length}
-                                    columnWrapperStyle={{
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                    }}
-                                />
-                            ) :
-                            (
-                                <View style={styles.dataContainer}>
-                                    <View style={{ flexDirection: "row" }}>
-                                        <Text style={styles.keyText}>error</Text>
-                                        <Text style={styles.keyText}>:</Text>
-                                        <Text style={styles.dataText}>No Data</Text>
-                                    </View>
-                                </View>
-                            )
+                    isDataEmpty ?
+                        (
+                            <FlatList
+                                data={data}
+                                renderItem={({ item }) => <DataItem data={item}></DataItem>}
+                                numColumns={data.length}
+                                key={data.length}
+                                columnWrapperStyle={{
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                }}
+                            />
                         ) :
                         (
                             <View style={styles.dataContainer}>
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={styles.keyText}>error</Text>
                                     <Text style={styles.keyText}>:</Text>
-                                    <Text style={styles.dataText}>Undefined</Text>
+                                    <Text style={styles.dataText}>{request.name ? "No Data" : "Undefined"}</Text>
                                 </View>
                             </View>
                         )

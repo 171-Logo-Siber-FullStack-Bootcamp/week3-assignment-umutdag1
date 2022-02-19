@@ -9,8 +9,21 @@ export default function LoginScreen(props) {
     const params = props?.route?.params;
     const navigation = props?.navigation;
 
-    const { width, height } = Dimensions.get('window');
+    //const { width, height } = Dimensions.get('window');
     const { scale, verticalScale, moderateScale } = props?.scales;
+
+    const [width, setWidth] = useState(Dimensions.get('window').width);
+    const [height, setHeight] = useState(Dimensions.get('window').height);
+
+    console.log(width, height);
+
+    Dimensions.addEventListener('change', () => {
+        const newWidth = Dimensions.get('window').width;
+        const newHeight = Dimensions.get('window').height;
+
+        setWidth(newWidth);
+        setHeight(newHeight);
+    });
 
     const styles = StyleSheet.create({
         container: {
@@ -112,8 +125,8 @@ export default function LoginScreen(props) {
                     <TouchableOpacity
                         style={[styles.button]}
                         activeOpacity={0.7}
-                        onPress={loginAuth}
-                        //onPress={() => navigation.navigate('Layout')}
+                        //onPress={loginAuth}
+                        onPress={() => navigation.navigate('Layout')}
                     >
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>
