@@ -28,3 +28,7 @@ cd week3-assignment-umutdag1
 npm i
 npm start
 ```
+
+## Screenshots (Ekran Görüntüleri)
+
+[ScreenShots](https://github.com/171-Logo-Siber-FullStack-Bootcamp/week3-assignment-umutdag1/tree/main/screenshots)
