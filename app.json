@@ -3,7 +3,7 @@
     "name": "week3-assignment-umutdag1",
     "slug": "week3-assignment-umutdag1",
     "version": "1.0.0",
-    "orientation": "all",
+    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
