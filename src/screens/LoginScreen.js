@@ -1,5 +1,5 @@
 /* Fundamentals */
-import { Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput} from 'react-native';
+import { Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 /* Externals */
 import FirebaseConn from '../../firebase';
@@ -12,7 +12,7 @@ export default function LoginScreen(props) {
     const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
     const { scale, verticalScale, moderateScale } = props?.scales; // scale Methods From Parent
 
-     // Initiliaze user of State Data in Functional Programming
+    // Initiliaze user of State Data in Functional Programming
     const [user, setUser] = useState({
         email: 'test@gmail.com', // Assign it to Empty String If You Want
         password: '123456' // Assign it to Empty String If You Want
@@ -33,9 +33,9 @@ export default function LoginScreen(props) {
             // Go to Layout Screen With Params of Matched fullName Obtained From Doc
             navigation.navigate({
                 name: 'Layout',
-                params: { 
+                params: {
                     fullName: `${result.name} ${result.surname}`
-                 },
+                },
                 merge: true,
             });
         } else {
