@@ -1,39 +1,43 @@
 /* Fundamentals */
-import { Platform, Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 /* Externals */
-import Jhr from '../libs/Jhr';
+import Jhr from '../libs/Jhr'; // This Library Uses An Axios Object as It's classed.
 
 export default function DataScreen(props) {
 
-    const params = props?.route?.params;
+    const params = props?.route?.params; // Navigator Params From Parent
 
-    const { width, height } = Dimensions.get('window');
-    const { scale, verticalScale, moderateScale } = props?.scales;
+    const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
+    const { scale, verticalScale, moderateScale } = props?.scales; // scale Methods From Parent
 
-    const request = {
-        name: params?.request?.name,
-        method: params?.request?.method
+    const request = { // Craeting Request Object To Get Data That are Wanted
+        name: params?.request?.name, // Coming From One of Menu Screen's Button Where Called to Navigate Method
+        method: params?.request?.method // Coming From One of Menu Screen's Button Where Called to Navigate Method
     };
 
-    const [data, updateData] = useState(null);
+    const [data, updateData] = useState(null); // Initiliaze State Data in Functional Programming
 
+    // It is used both ComponentDidMount and ComponentUnMount instead
+    // It'll be Run If and Only If request.name is Changed
     useEffect(() => {
-        const url = "https://jsonplaceholder.typicode.com/" + request.name;
-        const myJhr = new Jhr(url, request.method ? request.method : 'undefined');
+        const url = "https://jsonplaceholder.typicode.com/" + request.name; // Initiliaze url
+        const myJhr = new Jhr(url, request.method ? request.method : 'undefined'); // Creating Http Request Instance
 
+        // It is Called After Request Method is Checked.
         const callUpdateData = async () => {
-            const result = await myJhr.fetchResponse();
-            updateData(result.data);
+            const result = await myJhr.fetchResponse(); // Calling One of Http Request Instance's Method To Get Data
+            updateData(result.data); // Updating State Data and Render The Component Again
         }
 
-        if (request.method === 'GET') {
+        // Handling Http Request Instance Depending On Request Method
+        if (request.method === 'GET') { // It'll be Runing If Requested Method is GET
             callUpdateData();
         }
 
     }, [request.name]);
 
-    const isDataEmpty = data && data.length > 0;
+    const isDataEmpty = data && data.length > 0; // Setting Rule For Responsive Settings are Executed
 
     const styles = StyleSheet.create({
         container: {
@@ -57,7 +61,7 @@ export default function DataScreen(props) {
         },
         dataContainer: {
             width: "95%",
-            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             backgroundColor: "#eeeeee",
             borderRadius: 10,
             marginVertical: 8
@@ -76,24 +80,25 @@ export default function DataScreen(props) {
         mainText: {
             color: "#eeeeee",
             marginLeft: "3%",
-            fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70),
+            fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70), // Responsive Style
             fontWeight: "bold",
         },
         keyText: {
             color: "#666666",
             marginLeft: 6,
-            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             fontWeight: "bold",
         },
         dataText: {
             color: "#aaaaaa",
             marginLeft: 6,
-            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             fontWeight: "bold",
             flexShrink: 1,
         }
     });
 
+    // It's Created For FlatList Render Property To Render a Data View Which will be Appended In FlatList 
     const DataItem = ({ data }) => (
         <View style={[styles.dataContainer]}>
             {
@@ -104,7 +109,7 @@ export default function DataScreen(props) {
                             <Text style={styles.keyText}>:</Text>
                             <Text style={styles.dataText}>
                                 {
-                                    typeof data[key] === 'object' ?
+                                    typeof data[key] === 'object' ? // Converting to String if Data is an Object
                                         JSON.stringify(data[key]) :
                                         data[key]
                                 }
@@ -123,7 +128,7 @@ export default function DataScreen(props) {
             </View>
             <View style={[styles.bottomContainer]}>
                 {
-                    isDataEmpty ?
+                    isDataEmpty ? // For Rendering a Component Depending On Obtained Data From HttpRequest
                         (
                             <FlatList
                                 data={data}

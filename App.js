@@ -1,7 +1,7 @@
 /* Fundamentals */
-import { StatusBar } from 'expo-status-bar';
-import { Dimensions, StyleSheet, LogBox  } from 'react-native';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+// import { StatusBar } from 'expo-status-bar';
+import { Dimensions,LogBox  } from 'react-native';
+import React from 'react';
 /* Externals */
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -14,10 +14,12 @@ import LayoutScreen from './src/screens/LayoutScreen';
 
 export default function App() {
 
-  LogBox.ignoreAllLogs();
+  LogBox.ignoreAllLogs(); // Ignore such stupid logs
 
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
 
+  // For Responsive Screen
+  /******************************************************/
   //Guideline sizes are based on standard ~5" screen mobile device
   const guidelineBaseWidth = 350;
   const guidelineBaseHeight = 680;
@@ -25,8 +27,9 @@ export default function App() {
   const scale = (size, screenWidth = width) => screenWidth / guidelineBaseWidth * size;
   const verticalScale = (size, screenHeight = height) => screenHeight / guidelineBaseHeight * size;
   const moderateScale = (size, factor = 0.5) => size + (scale(size) - size) * factor;
-
-  const Stack = createNativeStackNavigator();
+   /******************************************************/
+  
+  const Stack = createNativeStackNavigator(); // Creating Stack Screen Navigator
 
   return (
     <NavigationContainer>

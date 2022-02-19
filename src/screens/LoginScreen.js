@@ -1,37 +1,36 @@
 /* Fundamentals */
-import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput} from 'react-native';
+import React, { useState } from 'react';
 /* Externals */
 import FirebaseConn from '../../firebase';
 
 export default function LoginScreen(props) {
 
-    const params = props?.route?.params;
-    const navigation = props?.navigation;
+    const params = props?.route?.params; // Navigator Params From Parent
+    const navigation = props?.navigation; // Navigation Instance From Parent
 
-    const { width, height } = Dimensions.get('window');
-    const { scale, verticalScale, moderateScale } = props?.scales;
+    const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
+    const { scale, verticalScale, moderateScale } = props?.scales; // scale Methods From Parent
 
+     // Initiliaze user of State Data in Functional Programming
     const [user, setUser] = useState({
         email: 'test@gmail.com',
         password: ''
     });
 
-    console.log(user);
-
+    // It will be run If Login Button is Clicked
     const loginAuth = async () => {
-        console.log(user);
         const usersSnapShot = await FirebaseConn.getDocs(
             FirebaseConn.collection(FirebaseConn.db, "users")
-        );
+        ); // Getting Users From Requested Firebase
         const resultDoc = usersSnapShot.docs.find(doc => {
             const docData = doc.data();
             return docData.email === user.email &&
                 docData.password === user.password
-        });
-        const result = resultDoc?.data();
-        if (result) {
-            console.log(result);
+        }); // If user is Matched Then Assing it Matched Doc, Else undefined
+        const result = resultDoc?.data(); // Getting Data From Doc
+        if (result) { // If Result is Neither undefined or null
+            // Go to Layout Screen With Params of Matched fullName Obtained From Doc
             navigation.navigate({
                 name: 'Layout',
                 params: { 
@@ -40,13 +39,13 @@ export default function LoginScreen(props) {
                 merge: true,
             });
         } else {
+            // Setting user of State Data to Empty Because of Wrong Email or Password or Both
             setUser({
                 email: '',
                 password: ''
             });
         }
     }
-    console.log("dsadasd");
 
     const styles = StyleSheet.create({
         container: {
@@ -81,7 +80,7 @@ export default function LoginScreen(props) {
         mainText: {
             color: "#eeeeee",
             marginLeft: "3%",
-            fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70),
+            fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70), // Responsive Style
             fontWeight: "bold",
         },
         inputContainer: {
@@ -93,27 +92,27 @@ export default function LoginScreen(props) {
             backgroundColor: "#dddddd",
             textAlign: "center",
             width: "60%",
-            fontSize: width > height ? scale(height / width * 12) : verticalScale(width / height * 24),
-            padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 20),
+            fontSize: width > height ? scale(height / width * 12) : verticalScale(width / height * 24), // Responsive Style
+            padding: width > height ? scale(height / width * 10) : verticalScale(width / height * 20), // Responsive Style
             marginVertical: 10
         },
         buttonContainer: {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            marginVertical: width > height ? scale(height / width * 30) : verticalScale(width / height * 60)
+            marginVertical: width > height ? scale(height / width * 30) : verticalScale(width / height * 60) // Responsive Style
         },
         button: {
             backgroundColor: "#eeeeee",
             textAlign: "center",
-            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             borderRadius: 10,
             fontWeight: "bold",
             width: "25%",
             marginHorizontal: 12
         },
         buttonText: {
-            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             color: "#999999",
             fontWeight: "bold",
             textAlign: "center",
@@ -146,7 +145,6 @@ export default function LoginScreen(props) {
                         style={[styles.button]}
                         activeOpacity={0.7}
                         onPress={() => loginAuth()}
-                    //onPress={() => navigation.navigate('Layout')}
                     >
                         <Text style={styles.buttonText}>LOGIN</Text>
                     </TouchableOpacity>

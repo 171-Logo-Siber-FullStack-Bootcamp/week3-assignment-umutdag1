@@ -1,17 +1,17 @@
 /* Fundamentals */
-import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
 
 export default function HomeScreen(props) {
 
-    const params = props?.route?.params;
-    const outerParams = props?.outerParams;
-    const navigation = props?.navigation;
+    const params = props?.route?.params; // Navigator Params From Parent
+    const outerParams = props?.outerParams; // One of Component Prop Being Named as outerParams From Parent
+    const navigation = props?.navigation; // Navigation Instance From Parent
 
-    const { width, height } = Dimensions.get('window');
-    const { scale, verticalScale, moderateScale } = props?.scales;
+    const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
+    const { scale, verticalScale, moderateScale } = props?.scales; // scale Methods From Parent
 
-    const fullName = outerParams?.fullName;
+    const fullName = outerParams?.fullName; // One of Component Prop Being Named as fullName From Parent
 
     const styles = StyleSheet.create({
         container: {
@@ -46,7 +46,7 @@ export default function HomeScreen(props) {
         mainText: {
             color: "#eeeeee",
             marginLeft: "3%",
-            fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70),
+            fontSize: width > height ? scale(height / width * 35) : verticalScale(width / height * 70), // Responsive Style
             fontWeight: "bold",
         },
         textContainer: {
@@ -57,23 +57,23 @@ export default function HomeScreen(props) {
         text: {
             color: "#eeeeee",
             textAlign: "center",
-            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
         },
         buttonContainer: {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            marginVertical: width > height ? scale(height / width * 20) : verticalScale(width / height * 40)
+            marginVertical: width > height ? scale(height / width * 20) : verticalScale(width / height * 40) // Responsive Style
         },
         button: {
             backgroundColor: "#eeeeee",
             textAlign: "center",
             width: "40%",
-            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             borderRadius: 10
         },
         buttonText: {
-            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             color: "#999999",
             fontWeight: "bold",
             textAlign: "center",

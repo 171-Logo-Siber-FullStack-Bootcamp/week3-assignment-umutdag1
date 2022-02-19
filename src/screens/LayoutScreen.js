@@ -1,10 +1,10 @@
 /* Fundamentals */
-import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import { Dimensions } from 'react-native';
+import React from 'react';
 /* Externals */
-import { NavigationContainer } from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // For Tab Navigator Icons
 /* Screens */
 import MenuScreen from './MenuScreen';
 import DataScreen from './DataScreen';
@@ -12,13 +12,13 @@ import HomeScreen from './HomeScreen';
 
 export default function LayoutScreen(props) {
 
-  const params = props?.route?.params;
-  const navigation = props?.navigation;
+  const params = props?.route?.params; // Navigator Params From Parent
+  const navigation = props?.navigation; // Navigation Instance From Parent
 
-  const { width, height } = Dimensions.get('window');
-  const { scale, verticalScale, moderateScale } = props?.scales;
+  const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
+  const { scale, verticalScale, moderateScale } = props?.scales; // scale Methods From Parent
 
-  const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator(); // Creating Tab Screen Navigator
 
   return (
     <Tab.Navigator initialRouteName='Home'>

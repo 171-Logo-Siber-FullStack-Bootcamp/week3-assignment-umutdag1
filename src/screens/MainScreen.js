@@ -1,14 +1,14 @@
 /* Fundamentals */
 import { Platform, Dimensions, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export default function MainScreen(props) {
 
-    const params = props?.route?.params;
-    const navigation = props?.navigation;
+    const params = props?.route?.params; // Navigator Params From Parent
+    const navigation = props?.navigation; // Navigation Instance From Parent
 
-    const { width, height } = Dimensions.get('window');
-    const { scale, verticalScale, moderateScale } = props?.scales;
+    const { width, height } = Dimensions.get('window'); // Get Screen Width and Height
+    const { scale, verticalScale, moderateScale } = props?.scales; // scale Methods From Parent
 
     const styles = StyleSheet.create({
         container: {
@@ -45,26 +45,26 @@ export default function MainScreen(props) {
         },
         mainText: {
             color: "#eeeeee",
-            fontSize: width > height ? scale(height / width * 60) : verticalScale(width / height * 120),
+            fontSize: width > height ? scale(height / width * 60) : verticalScale(width / height * 120), // Responsive Style
             fontWeight: "bold",
         },
         subText: {
             color: "#eeeeee",
-            fontSize: width > height ? scale(height / width * 30) : verticalScale(width / height * 60),
+            fontSize: width > height ? scale(height / width * 30) : verticalScale(width / height * 60), // Responsive Style
             fontWeight: "bold"
         },
         innerText: {
             textAlignVertical: "center",
-            fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Times New Roman',
+            fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Times New Roman', // Times New Roman is Only Available in IOS and Roboto is Only in Android
         },
         button: {
             backgroundColor: "#eeeeee",
             width: "50%",
-            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            padding: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             borderRadius: 10
         },
         buttonText: {
-            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30),
+            fontSize: width > height ? scale(height / width * 15) : verticalScale(width / height * 30), // Responsive Style
             color: "#999999",
             fontWeight: "bold",
             textAlign: "center",
